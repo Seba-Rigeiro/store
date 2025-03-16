@@ -3,6 +3,7 @@ import { Container, Typography, Button } from "@mui/material";
 import Image from "next/image";
 import { Loader } from "@/components/common/loader";
 import { useProductDetail } from "@/hooks/use-product-detail";
+import { EmptyError } from "@/components/common/empty-error";
 
 const ProductDetail = () => {
   const router = useRouter();
@@ -11,7 +12,8 @@ const ProductDetail = () => {
   const { product, isLoading, isError } = useProductDetail(id as string);
 
   if (isLoading) return <Loader />;
-  if (isError) return <Typography>ERROR!!...</Typography>;
+
+  if (isError) return <EmptyError />;
 
   return (
     <Container>
@@ -24,7 +26,6 @@ const ProductDetail = () => {
       />
       <Typography variant="h6">${product?.price}</Typography>
       <Typography>{product?.description}</Typography>
-
       <Button variant="contained" onClick={() => router.push("/")}>
         Volver
       </Button>

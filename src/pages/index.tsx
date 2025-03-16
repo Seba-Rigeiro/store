@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { ProductCard } from "@/components/product-card";
 import { SearchBar } from "@/components/search-bar";
 import { Loader } from "@/components/common/loader";
@@ -7,6 +7,7 @@ import { Product } from "@/models/product";
 import { useRouter } from "next/router";
 import { useProducts } from "@/hooks/use-product";
 import { useSearch } from "@/hooks/use-seach";
+import { EmptyError } from "@/components/common/empty-error";
 
 const Home = () => {
   const { products, isLoading, isError } = useProducts();
@@ -16,7 +17,7 @@ const Home = () => {
   const router = useRouter();
 
   if (isLoading) return <Loader />;
-  if (isError) return <Typography>Error al cargar productos</Typography>;
+  if (isError) return <EmptyError />;
 
   const handleGoToProductDetail = (productId: string) => {
     router.push(`/product/${productId}`);
