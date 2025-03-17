@@ -6,7 +6,7 @@ import { useCart } from "@/context/cart-context";
 import { Product } from "@/models/product";
 import { useRouter } from "next/router";
 import { useProducts } from "@/hooks/use-product";
-import { useSearch } from "@/hooks/use-seach";
+import { useSearch } from "@/hooks/use-search";
 import { EmptyError } from "@/components/common/empty-error";
 
 const Home = () => {
