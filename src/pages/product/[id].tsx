@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
-import { Container, Typography, Button } from "@mui/material";
-import Image from "next/image";
+import { Container } from "@mui/material";
 import { Loader } from "@/components/common/loader";
 import { useProductDetail } from "@/hooks/use-product-detail";
 import { EmptyError } from "@/components/common/empty-error";
+import { ProductDetail } from "@/components/product-detail";
 
-const ProductDetail = () => {
+const ProductDetailPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -13,23 +13,12 @@ const ProductDetail = () => {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return <EmptyError />;
+  if (isError || !product) return <EmptyError />;
 
   return (
     <Container>
-      <Typography variant="h4">{product?.title}</Typography>
-      <Image
-        src={product?.image ?? ""}
-        alt={product?.title ?? ""}
-        width="300"
-        height="300"
-      />
-      <Typography variant="h6">${product?.price}</Typography>
-      <Typography>{product?.description}</Typography>
-      <Button variant="contained" onClick={() => router.push("/")}>
-        Volver
-      </Button>
+      <ProductDetail product={product} />
     </Container>
   );
 };
-export default ProductDetail;
+export default ProductDetailPage;
